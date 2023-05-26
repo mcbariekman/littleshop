@@ -1,8 +1,8 @@
 // Define Crop component
 function Crop() {
-    const [planted, setPlanted] = React.useState(false);
-    const [grown, setGrown] = React.useState(false);
-    const [harvested, setHarvested] = React.useState(false);
+    const [planted, setPlanted] = useState(false);
+    const [grown, setGrown] = useState(false);
+    const [harvested, setHarvested] = useState(false);
   
     function plantCrop() {
       if (!planted && !grown && !harvested) {
@@ -16,32 +16,51 @@ function Crop() {
       }
     }
   
-    return (
-      <div>
-        <button onClick={plantCrop} disabled={planted || grown || harvested}>
-          Plant Crop
-        </button>
-        <button onClick={harvestCrop} disabled={!grown || harvested}>
-          Harvest Crop
-        </button>
-        <div>
-          {planted && !grown && !harvested && (
-            <p>Crop planted. Wait for it to grow.</p>
-          )}
-          {!planted && !grown && !harvested && (
-            <p>No crop planted.</p>
-          )}
-          {grown && !harvested && (
-            <p>Crop grown. Ready to be harvested.</p>
-          )}
-          {harvested && (
-            <p>Crop harvested. You can plant a new crop.</p>
-          )}
-        </div>
-      </div>
-    );
+    const cropStatus = () => {
+      if (planted && !grown && !harvested) {
+        return "Crop planted. Wait for it to grow.";
+      } else if (!planted && !grown && !harvested) {
+        return "No crop planted.";
+      } else if (grown && !harvested) {
+        return "Crop grown. Ready to be harvested.";
+      } else if (harvested) {
+        return "Crop harvested. You can plant a new crop.";
+      }
+    };
+  
+    const buttonDisabled = () => {
+      return (planted || grown || harvested);
+    }
+  
+    const buttonHarvestDisabled = () => {
+      return (!grown || harvested);
+    }
+  
+    const element = document.createElement("div");
+  
+    const plantButton = document.createElement("button");
+    plantButton.textContent = "Plant Crop";
+    plantButton.addEventListener("click", plantCrop);
+    plantButton.disabled = buttonDisabled();
+  
+    const harvestButton = document.createElement("button");
+    harvestButton.textContent = "Harvest Crop";
+    harvestButton.addEventListener("click", harvestCrop);
+    harvestButton.disabled = buttonHarvestDisabled();
+  
+    const statusDiv = document.createElement("div");
+    const statusMessage = document.createElement("p");
+    statusMessage.textContent = cropStatus();
+    statusDiv.appendChild(statusMessage);
+  
+    element.appendChild(plantButton);
+    element.appendChild(harvestButton);
+    element.appendChild(statusDiv);
+  
+    return element;
   }
   
   // Render Crop component
-  ReactDOM.render(<Crop />, document.getElementById("root"));
+  const rootElement = document.getElementById("root");
+  rootElement.appendChild(Crop());
   
