@@ -1,23 +1,28 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Farming Game</title>
+  <style>
+    .crop-image {
+      width: 200px;
+      height: 200px;
+    }
+  </style>
 </head>
 <body>
-  <div id="root"></div>
+  <div>
+    <h1>Farming Game</h1>
+    <button id="waterButton">Water Gloom</button>
+    <button id="harvestButton">Harvest Gloom</button>
+    <button id="resetButton">Reset Gloom</button>
+  </div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-standalone/6.26.0/babel.min.js"></script>
-  <script src="https://unpkg.com/react/umd/react.development.js"></script>
-  <script src="https://unpkg.com/react-dom/umd/react-dom.development.js"></script>
+  <div id="crop-container">
+    <!-- Crop images will be dynamically added here -->
+  </div>
 
-  <script src="/function/shop.js" type="text/babel"></script>
-  <script src="/function/source.js" type="text/babel"></script>
-
-  <script type="text/javascript">
-    ReactDOM.render(
-      React.createElement(Crop, null),
-      document.getElementById('root')
-    );
-  </script>
+  <script src="/src/gloom.js"></script>
 </body>
 </html>
