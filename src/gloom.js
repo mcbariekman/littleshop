@@ -100,4 +100,17 @@ const crops = {
     resetCrop(farm[0]);
     waterCrop('gloom');
     waterCrop('gloom');
+    waterCrop('gloom');
+    waterCrop('gloom');
+    harvestCrop('gloom');
+  
+    // Display final stage image
+    farm.forEach(crop => {
+      const imageElement = new Image();
+      imageElement.src = crop.image;
+      document.body.appendChild(imageElement);
+    });
+  }
+  
+  farmingGame();
   
